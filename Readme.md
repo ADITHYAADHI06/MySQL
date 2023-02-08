@@ -150,4 +150,104 @@ use the IS NULL and IS NOT NULL operators.
 ## The IS NULL Operator
 The IS NULL operator is used to test for empty values
 
+# MySQL UPDATE Statement
 
+UPDATE statement is used to modify the existing records in a table.
+
+Example : 
+updates the first customer (CustomerID = 1) with a new contact person and a new city.
+
+    UPDATE Customers
+    SET ContactName = 'Alfred Schmidt', City = 'Frankfurt'
+    WHERE CustomerID = 1;
+
+### Update Warning!
+ 
+ Be careful when updating records. If you omit the WHERE clause, ALL records will be updated!
+
+    UPDATE Customers
+    SET PostalCode = 00000;
+
+# MySQL DELETE Statement
+
+The DELETE statement is used to delete existing records in a table.
+
+Example : 
+SQL statement deletes the customer "Alfreds Futterkiste" from the "Customers" table:
+
+    DELETE FROM Customers WHERE CustomerName='Alfreds Futterkiste';
+
+## Delete All Records
+ It is possible to delete all rows in a table without deleting the table
+
+    DELETE FROM table_name;
+
+### If you omit the WHERE clause, all records in the table will be deleted!
+
+# MySQL LIMIT Clause
+
+#### LIMIT clause is used to specify the number of records to return.
+
+The LIMIT clause is useful on large tables with thousands of records. Returning a large number of records can impact performance.
+
+Example : 
+selects the first three records from the "Customers" table
+
+    SELECT * FROM Customers
+    LIMIT 3;
+
+# MySQL MIN() and MAX() Functions
+### The MIN() function returns the smallest value of the selected column.
+### The MAX() function returns the largest value of the selected column.
+
+Example :
+
+    SELECT MIN(Price) AS SmallestPrice
+    FROM Products;
+
+Example :
+
+    SELECT MAX(Price) AS LargestPrice
+    FROM Products;
+
+# MySQL COUNT(), AVG() and SUM() Functions
+
+### The COUNT() function returns the number of rows that matches a specified criterion.
+
+Example : 
+    
+    SELECT COUNT(ProductID)
+    FROM Products;
+
+### The AVG() function returns the average value of a numeric column.
+
+Example : 
+    
+    SELECT AVG(Price)
+    FROM Products;
+
+### The SUM() function returns the total sum of a numeric column. 
+
+Example : 
+    
+    SELECT SUM(Quantity)
+    FROM OrderDetails;
+
+#### Note: NULL values are ignored.
+
+# MySQL LIKE Operator
+
+#### The LIKE operator is used in a WHERE clause to search for a specified pattern in a column.
+
+There are two wildcards often used in conjunction with the LIKE operator:
+
+- The percent sign (%) represents zero, one, or multiple characters
+- The underscore sign (_) represents one, single character
+
+| LIKE Operator   | Description                |
+| :--------   | :------------------------- |
+| WHERE CustomerName LIKE 'a%'   |  Finds any values that start with "a" |
+| WHERE CustomerName LIKE '%a'   |  Finds any values that end with "a"	 |
+| WHERE CustomerName LIKE '%or%'   |  Finds any values that have "or" in any position	 |
+| WHERE CustomerName LIKE '_r%'   | Finds any values that have "r" in the second position	 |
+| WHERE ContactName LIKE 'a%o'   |   Finds any values that start with "a" and ends with "o"	 |
