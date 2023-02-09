@@ -251,3 +251,55 @@ There are two wildcards often used in conjunction with the LIKE operator:
 | WHERE CustomerName LIKE '%or%'   |  Finds any values that have "or" in any position	 |
 | WHERE CustomerName LIKE '_r%'   | Finds any values that have "r" in the second position	 |
 | WHERE ContactName LIKE 'a%o'   |   Finds any values that start with "a" and ends with "o"	 |
+
+# The MySQL IN Operator
+
+### The IN operator allows you to specify multiple values in a WHERE clause.
+
+Example : selects all customers that are from the same countries as the suppliers
+    
+    SELECT * FROM Customers
+    WHERE Country IN (SELECT Country FROM Suppliers);
+
+Example : selects all customers that are NOT located in "Germany", "France" or "UK"
+    
+    SELECT * FROM Customers
+    WHERE Country NOT IN ('Germany', 'France', 'UK');
+
+# The MySQL BETWEEN Operator
+### The BETWEEN operator selects values within a given range. 
+The values can be numbers, text, or dates.
+
+Example : selects all products with a price between 10 and 20
+    
+    SELECT * FROM Products
+    WHERE Price BETWEEN 10 AND 20;
+
+Example : selects all products with a ProductName between "Carnarvon Tigers" and "Mozzarella di Giovanni
+    
+    SELECT * FROM Products
+    WHERE ProductName BETWEEN 'Carnarvon Tigers' AND    'Mozzarella di Giovanni'
+    ORDER BY ProductName;
+
+#### NOT BETWEEN Text Values Example
+
+    SELECT * FROM Products
+    WHERE ProductName NOT BETWEEN 'Carnarvon Tigers' AND 'Mozzarella di Giovanni'
+    ORDER BY ProductName;
+
+### BETWEEN Dates Example
+The following SQL statement selects all orders with an OrderDate between '01-July-1996' and '31-July-1996':
+
+    SELECT * FROM Orders
+    WHERE OrderDate BETWEEN '1996-07-01' AND '1996-07-31';
+
+# MySQL Aliases
+### Aliases are used to give a table, or a column in a table, a temporary name.
+
+- Aliases are often used to make column names more readable.
+- An alias is created with the AS keyword.
+
+Example: 
+
+    SELECT CustomerID AS ID, CustomerName AS Customer
+    FROM Customers;
