@@ -303,3 +303,73 @@ Example:
 
     SELECT CustomerID AS ID, CustomerName AS Customer
     FROM Customers;
+
+# MySQL Joining Tables
+
+## JOIN clause is used to combine rows from two or more tables, based on a related column between them.
+
+Example : finding the manegers in employees table
+    
+    select employee.name from employee 
+    JOIN branch 
+    on employee.emp_id=branch.mgr_id;
+
+###  INNER JOIN: Returns records that have matching values in both tables
+### LEFT JOIN: Returns all records from the left table, and the matched records from the right table
+### RIGHT JOIN: Returns all records from the right table, and the matched records from the left table
+### CROSS JOIN: Returns all records from both tables
+
+
+Example:
+
+    SELECT Orders.OrderID, Customers.CustomerName, Shippers.ShipperName
+    FROM ((Orders
+    INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID)
+    INNER JOIN Shippers ON Orders.ShipperID = Shippers.ShipperID);
+
+# MySQL UNION Operator
+
+### The UNION operator is used to combine the result-set of two or more SELECT statements
+
+- Every SELECT statement within UNION must have the same number of columns
+- The columns must also have similar data types
+- The columns in every SELECT statement must also be in the same order
+
+Note: If some customers or suppliers have the same city, each city will only be listed once, because UNION selects only distinct values. Use UNION ALL to also select duplicate values!
+
+Example:
+
+    SELECT City FROM Customers
+    UNION
+    SELECT City FROM Suppliers
+    ORDER BY City;
+
+Example:
+
+    SELECT City FROM Customers
+    UNION ALL
+    SELECT City FROM Suppliers
+    ORDER BY City;
+
+# MySQL GROUP BY Statement
+
+### rows that have the same values into summary rows
+
+#### The GROUP BY statement is often used with aggregate functions (COUNT(), MAX(), MIN(), SUM(), AVG())
+
+Example : lists the number of customers in each country
+
+    SELECT COUNT(CustomerID), Country
+    FROM Customers
+    GROUP BY Country;
+
+# The MySQL HAVING Clause
+
+### The HAVING clause was added to SQL because the WHERE keyword cannot be used with aggregate functions.
+
+Example: lists the number of customers in each country. Only include countries with more than 5 customers
+
+    SELECT COUNT(CustomerID), Country
+    FROM Customers
+    GROUP BY Country
+    HAVING COUNT(CustomerID) > 5;
