@@ -373,3 +373,34 @@ Example: lists the number of customers in each country. Only include countries w
     FROM Customers
     GROUP BY Country
     HAVING COUNT(CustomerID) > 5;
+
+# INSERT INTO SELECT Statement
+
+###  statement copies data from one table and inserts it into another table.
+
+Example: copies "Suppliers" into "Customers"
+
+    INSERT INTO Customers (CustomerName, City, Country)
+    SELECT SupplierName, City, Country FROM Suppliers;
+
+# MySQL Comments
+
+### 
+    Single line comments start with --.
+
+###     
+    /*Select all the columns
+    of all the records
+    in the Customers table:*/
+
+# MySQL IFNULL() & COALESCE() Function
+
+### IFNULL() function lets you return an alternative value if an expression is NULL.
+
+Example:
+    SELECT ProductName, UnitPrice * (UnitsInStock + IFNULL(UnitsOnOrder, 0))
+    FROM Products;
+
+## MySQL operators
+
+
